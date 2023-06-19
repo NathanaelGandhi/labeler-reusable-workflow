@@ -1,0 +1,25 @@
+# Nathanael Gandhi | github.com/NathanaelGandhi
+
+name: 'Label issues and PRs'
+
+on:
+  workflow_call:
+    inputs:
+      config-path:
+        required: true
+        type: string
+    secrets:
+      caller_token:
+        required: true
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: github/issue-labeler@v3.1
+      with:
+        repo-token: ${{ secrets.caller_token }}
+        configuration-path: ${{ inputs.config-path }}
+        include-title: 1
+        sync-labels: 1
+        enable-versioned-regex: 0
